@@ -1,35 +1,10 @@
-import React, {Component} from 'react';
+import React, { useState } from 'react';
 
+export default () => {
+    const [fruits] = useState(['Banana', 'Orange', 'Apple'])
+    const [selectedColorIdx, setColorIndx] = useState(null)
 
-class Fruits extends Component {
-    state = {
-        fruits: ['Banana', 'Orange', 'Apple'],
-        activeIndex: -1,
-    };
-
-    changeStyleFunction = (index) => {
-        this.setState ({
-            activeIndex: index
-        });
-    };
-
-    render() {
-        return (
-
-            <div>
-                {this.state.fruits.map((nextFruit, index) => {
-                       return <p key={index.toString()} onClick={this.changeStyleFunction.bind(this, index)}
-                                 style={
-                                     index === this.state.activeIndex ?
-                                         { color: 'coral' } : { color: 'black' }}>{nextFruit}</p>
-                }
-                )
-                }
-
-            </div>
-        );
-    }
+    return fruits.map((fruit, idx) => <p onClick={() => setColorIndx(idx)}
+        className={selectedColorIdx === idx ? 'coral' : 'black'} key={`fruit-${idx}`}>{fruit}</p>)
 }
 
-
-export default Fruits;
